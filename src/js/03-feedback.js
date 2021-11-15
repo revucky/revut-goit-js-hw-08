@@ -1,3 +1,5 @@
+import throttle from "lodash.throttle";
+
 const STORAGE_KEY = "feedback-form";
 
 const data = {};
@@ -21,7 +23,6 @@ const onInput = (e) => {
 
 const onFormSubmit = (e) => {
   e.preventDefault();
-  // e.target.reset();
   e.currentTarget.reset();
   localStorage.removeItem(STORAGE_KEY);
 };
@@ -35,7 +36,7 @@ function populateMessageOutput() {
   }
 }
 refs.form.addEventListener("submit", onFormSubmit);
-refs.form.addEventListener("input", _.throttle(onInput, 500));
+refs.form.addEventListener("input", throttle(onInput, 500));
 
 populateMessageOutput();
 
